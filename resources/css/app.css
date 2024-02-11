@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: "Inter", sans-serif;
+}
+
+.btn-primary {
+    @apply px-4 py-2 bg-gradient-to-b from-[#444444] to-[#222222] text-white rounded-md shadow;
+}
+
+.error {
+    @apply text-sm text-red-500;
+}
+
+.spinner-content {
+    display: none;
+}
+
+[disabled] .spinner-content {
+    display: inline;
+}
