@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -50,11 +51,21 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function getProfileImageURL(int $size = 500): string
+    {
+        $email = strtolower(trim($this->email));
+        $gravatarUrl = 'https://gravatar.com/avatar/' . hash('sha256', $email) . '?s=' . $size;
+        if ($this->photo) {
+            return Storage::url('pictures/' . $this->photo);
+        }
+        return $gravatarUrl;
+    }
+
     protected function appearance(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => json_decode($value, true),
-            set: fn ($value) => json_encode($value),
+            get: fn($value) => json_decode($value, true),
+            set: fn($value) => json_encode($value),
         );
     }
 

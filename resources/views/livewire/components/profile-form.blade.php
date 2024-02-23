@@ -3,14 +3,9 @@
     <form class="space-y-6" wire:submit="submit">
         <div class="space-y-2 flex items-center gap-6">
             <div class="relative">
-                @php
-                    $profile_image = 'https://gravatar.com/avatar/' . hash('sha256', strtolower(trim(auth()->user()->email))) . '?s=500';
-                    if (auth()->user()->photo) {
-                        $profile_image = \Illuminate\Support\Facades\Storage::url('pictures/' . auth()->user()->photo);
-                    }
-                @endphp
+
                 <img class="w-20 h-20 rounded-full border-2 border-zinc-800"
-                    src="{{ $photo ? $photo->temporaryUrl() : $profile_image }}" alt="{{ auth()->user()->name }}" />
+                    src="{{ auth()->user()->getProfileImageURL() }}" alt="{{ auth()->user()->name }}" />
                 @if (auth()->user()->photo)
                     <button type="button" class="absolute -top-1 right-0 bg-white w-max rounded-full"
                         wire:click='removePhoto'>
@@ -94,7 +89,7 @@
                         </button>
                         <div class="relative w-max">
                             <select
-                                class="rounded-md text-sm 
+                                class="rounded-md text-sm
                                 focus:ring-zinc-800 focus:outline-transparent focus:ring-2 disabled:pointer-events-none disabled:opacity-50 border border-input shadow-sm hover:bg-accent h-9 px-4 py-2 w-[200px] appearance-none bg-transparent font-normal"
                                 wire:model="urls.{{ $key }}.type" name="font" id=":r8b:-form-item"
                                 aria-describedby=":r8b:-form-item-description" aria-invalid="false">

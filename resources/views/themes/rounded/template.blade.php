@@ -21,7 +21,7 @@
     <div class="max-w-2xl mx-auto text-white">
         <div class="flex flex-col gap-10 justify-center items-center min-h-screen p-6">
             <div class="flex flex-col gap-4">
-                <img class="w-[200px] h-[200px] rounded-full mx-auto" src="{{ $profile_image }}" alt="hello world" />
+                <img class="w-[200px] h-[200px] rounded-full mx-auto" src="{{ $user->getProfileImageURL() }}" alt="hello world" />
                 <div class="flex flex-col gap-2">
                     <h5 class="font-semibold text-3xl text-center">
                         {{ $user->name }}

@@ -10,7 +10,7 @@
             @auth
                 <a wire:navigate href="/profile">
                     <img class="rounded-full w-10 h-10 border-4 border-zinc-150"
-                        src="https://gravatar.com/avatar/{{ hash('sha256', strtolower(trim(auth()->user()->email))) }}?s=40"
+                        src="{{ auth()->user()->getProfileImageURL(40) }}"
                         alt="profile image" />
                 </a>
             @else
